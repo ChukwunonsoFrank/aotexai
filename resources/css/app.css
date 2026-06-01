@@ -1,20 +1,18 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /* Preline UI */
 @import "../../node_modules/preline/variants.css";
 @source "../../node_modules/preline/dist/*.js";
 
-@import '../../vendor/livewire/flux/dist/flux.css';
-
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
-@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans:
+        "Montserrat", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-condensed: "Bebas Neue", sans-serif;
     --font-dashboard: "Inter", sans-serif;
     --font-mono: "IBM Plex Mono", monospace;
@@ -32,19 +30,26 @@
     --color-zinc-950: #0a0a0a;
 
     --color-dashboard: #1d1f26;
-    --color-trade: #2D3139;
-    --color-trade-badge: #3F4550;
-    --color-asset-indicator: #2C303A;
-    --color-input-border: #2A2B39;
-    --color-navbar: #2C303A;
+    --color-trade: #2d3139;
+    --color-trade-badge: #3f4550;
+    --color-asset-indicator: #2c303a;
+    --color-input-border: #2a2b39;
+    --color-navbar: #2c303a;
     --color-accent: #25258e;
     --color-buy-green: #35a947;
-    --color-accent-hover: #2E2EB2;
+    --color-accent-hover: #2e2eb2;
     --color-accent-content: var(--color-neutral-800);
     --color-accent-foreground: var(--color-white);
 }
 
 @layer theme {
+    .dashboard-theme {
+        --color-accent: #25258e;
+        --color-accent-hover: #2e2eb2;
+        --color-accent-content: var(--color-neutral-800);
+        --color-accent-foreground: var(--color-white);
+    }
+
     .dark {
         --color-accent: var(--color-white);
         --color-accent-content: var(--color-white);
@@ -53,7 +58,6 @@
 }
 
 @layer base {
-
     *,
     ::after,
     ::before,
@@ -63,12 +67,58 @@
     }
 }
 
+/**
+    The lines above are intact.
+    The lines below were added by maryUI installer.
+*/
+
+/** daisyUI */
+@plugin "daisyui" {
+    themes:
+        light --default,
+        dark --prefersdark;
+}
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+
+    --color-primary: #00d5d5;
+}
+
+/* Define the light theme */
+
+@plugin "daisyui/theme" {
+    name: "dark";
+    prefersdark: true;
+
+    --color-primary: #00d5d5;
+}
+
+/* maryUI */
+@source "../../vendor/robsontenorio/mary/src/View/Components/**/*.php";
+
+/* Theme toggle */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/**
+* Paginator - Traditional style
+* Because Laravel defaults does not match well the design of daisyUI.
+*/
+
+.mary-table-pagination span[aria-current="page"] > span {
+    @apply bg-primary text-base-100;
+}
+
+.mary-table-pagination button {
+    @apply cursor-pointer;
+}
+
 [data-flux-field]:not(ui-radio) {
     @apply grid gap-2;
 }
 
 [data-flux-label] {
-    @apply  !mb-0 !leading-tight;
+    @apply !mb-0 !leading-tight;
 }
 
 input:focus[data-flux-control],
@@ -78,27 +128,33 @@ select:focus[data-flux-control] {
 }
 
 .hero-banner {
-    background: url('../../public/assets/images/banner-background.jpg');
+    background: url("../../public/homepage/assets/images/banner-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .about-hero-banner {
-    background: url('../../public/assets/images/about-us-hero-background.jpg');
+    background: url("../../public/homepage/assets/images/about-us-hero-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .about-trades-per-day-background {
-    background: url('../../public/assets/images/about-us-trades-per-day-background.jpg');
+    background: url("../../public/homepage/assets/images/about-us-trades-per-day-background.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 @keyframes pulse-bg {
-    0% { background-color: #3D4351; }
-    50% { background-color: #4F5669; }
-    100% { background-color: #606980; }
+    0% {
+        background-color: #3d4351;
+    }
+    50% {
+        background-color: #4f5669;
+    }
+    100% {
+        background-color: #606980;
+    }
 }
 
 .animate-pulse-bg {
@@ -106,14 +162,14 @@ select:focus[data-flux-control] {
 }
 
 @layer utilities {
-  .scrollbar-hide {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
-  
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;  /* Chrome, Safari and Opera */
-  }
+    .scrollbar-hide {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
+    }
 }
 
 /* \[:where(&)\]:size-4 {

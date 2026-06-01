@@ -10,35 +10,38 @@
 
                 <x-settings.layout :heading="__('Update password')" :subheading="__('Ensure your account is using a long, random password to stay secure')">
                     <form wire:submit="updatePassword" class="mt-6 space-y-6">
-                        <flux:label class="text-white! mb-2!">Current password</flux:label>
-                        <flux:input class:input="bg-transparent! text-white! border-gray-700! text-sm!"
-                            wire:model="current_password"
-                            type="password"
-                            required
-                            autocomplete="current-password"
-                        />
-            
-                        <flux:label class="text-white! mb-2!">New password</flux:label>
-                        <flux:input class:input="bg-transparent! text-white! border-gray-700! text-sm!"
-                            wire:model="password"
-                            type="password"
-                            required
-                            autocomplete="new-password"
-                        />
-            
-                        <flux:label class="text-white! mb-2!">Confirm password</flux:label>
-                        <flux:input class:input="bg-transparent! text-white! border-gray-700! text-sm!"
-                            wire:model="password_confirmation"
-                            type="password"
-                            required
-                            autocomplete="new-password"
-                        />
-            
+                        <div>
+                            <label for="current_password" class="block text-xs font-medium mb-2 text-zinc-300">{{ __('Current password') }}</label>
+                            <input id="current_password" wire:model="current_password" type="password" required
+                                autocomplete="current-password"
+                                class="bg-navbar text-white border border-gray-700 text-sm py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:outline-0" />
+                            @error('current_password')
+                                <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="password" class="block text-xs font-medium mb-2 text-zinc-300">{{ __('New password') }}</label>
+                            <input id="password" wire:model="password" type="password" required autocomplete="new-password"
+                                class="bg-navbar text-white border border-gray-700 text-sm py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:outline-0" />
+                            @error('password')
+                                <p class="text-xs text-red-500 mt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div>
+                            <label for="password_confirmation" class="block text-xs font-medium mb-2 text-zinc-300">{{ __('Confirm password') }}</label>
+                            <input id="password_confirmation" wire:model="password_confirmation" type="password" required
+                                autocomplete="new-password"
+                                class="bg-navbar text-white border border-gray-700 text-sm py-2.5 sm:py-3 px-4 block w-full rounded-lg sm:text-sm focus:outline-0" />
+                        </div>
+
                         <div class="flex items-center gap-4">
-                            <div class="flex items-center justify-end">
-                                <flux:button variant="primary" type="submit" class="w-full">{{ __('Save') }}</flux:button>
-                            </div>
-            
+                            <button type="submit"
+                                class="py-2.5 cursor-pointer px-4 md:px-6 text-center gap-x-2 text-sm font-semibold rounded-lg bg-accent text-white focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none">
+                                {{ __('Save') }}
+                            </button>
+
                             <x-action-message class="me-3 text-green-500" on="password-updated">
                                 {{ __('Saved.') }}
                             </x-action-message>
@@ -49,6 +52,5 @@
         </div>
     </div>
 </div>
-
 
 

@@ -37,7 +37,7 @@
     </style>
 </head>
 
-<body class="bg-dashboard font-dashboard">
+<body class="bg-dashboard font-dashboard dashboard-theme">
     <main class="flex flex-col h-svh space-y-4">
         <header class="pt-4 mb-4 px-4 flex-none lg:pb-4 lg:mb-0 lg:border-b-[0.1px] lg:border-gray-700">
             <div class="md:flex md:items-center md:justify-between md:gap-x-20 lg:gap-x-[48rem]">

@@ -1,21 +1,35 @@
- <div class="flex flex-col gap-6 py-24 px-4 md:px-56 lg:px-[35rem]">
-     <x-auth-header :title="__('Forgot Password')" :description="__('Enter your email to receive a password reset link')" />
+<div class="auth-login-screen">
+    <div class="auth-login-wrap">
+        <div class="auth-brand">
+            <svg class="brand-mark" viewBox="0 0 72 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M10 47L31 11L43 17" />
+                <path d="M17 49L59 47" />
+                <path d="M17 42C31 39 43 34 58 29" />
+            </svg>
+            <span class="brand-text">AOITEXAI</span>
+        </div>
 
-     <!-- Session Status -->
-     <x-auth-session-status class="text-center" :status="session('status')" />
+        <div class="login">
+            <h1>Forgot Password</h1>
+            <div class="login-divider"></div>
 
-     <form wire:submit="sendPasswordResetLink" class="flex flex-col gap-6">
-         <!-- Email Address -->
-         <input wire:model="email" type="email"
-             class="py-3 px-4 block w-full border font-medium text-gray-600 border-gray-200 rounded-sm text-sm disabled:opacity-50 disabled:pointer-events-none"
-             required placeholder="Email">
+            <form wire:submit="sendPasswordResetLink" class="login-form">
+                <x-auth-session-status class="text-center w-full text-sm text-red-300" :status="session('status')" />
 
-         <flux:button variant="primary" type="submit" class="w-full rounded-xs">{{ __('Email Password Reset Link') }}
-         </flux:button>
-     </form>
+                <p class="meta-line">Enter your email to receive a password reset link.</p>
 
-     <div class="space-x-1 rtl:space-x-reverse text-center text-xs text-zinc-700 font-medium">
-         {{ __('Or, return to') }}
-         <flux:link class="text-accent" :href="route('login')">{{ __('log in') }}</flux:link>
-     </div>
- </div>
+                <label class="field-wrap">
+                    <i class="fa fa-envelope-o field-icon" aria-hidden="true"></i>
+                    <input wire:model="email" type="email" required placeholder="Your Email" class="field-input">
+                </label>
+
+                <button type="submit" class="login-submit">Email Password Reset Link</button>
+            </form>
+
+            <p class="meta-line meta-line-lg">
+                Or, return to
+                <a wire:navigate href="{{ route('login') }}">Log in</a>
+            </p>
+        </div>
+    </div>
+</div>

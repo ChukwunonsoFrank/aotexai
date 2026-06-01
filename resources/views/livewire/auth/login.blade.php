@@ -1,51 +1,50 @@
-<div class="flex flex-col gap-6 py-24 px-4 md:px-56 lg:px-[35rem]">
-    <x-auth-header :title="__('Log In')" :description="__('')" />
-
-    <!-- Session Status -->
-    <x-auth-session-status class="text-center" :status="session('status')" />
-
-    <form wire:submit="login" class="flex flex-col gap-4">
-        <!-- Email Address -->
-        <input wire:model="email" type="email"
-            class="py-3 px-4 block w-full border font-medium text-gray-600 border-gray-200 rounded-sm text-sm disabled:opacity-50 disabled:pointer-events-none"
-            autocomplete="email" required placeholder="Email">
-
-        <!-- Password -->
-        <input wire:model="password" type="password"
-            class="py-3 px-4 block w-full border font-medium text-gray-600 border-gray-200 rounded-sm text-sm disabled:opacity-50 disabled:pointer-events-none"
-            autocomplete="current-password" required placeholder="Password">
-
-        <div class="mt-2">
-            <div wire:ignore class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}" data-callback="onRecaptchaSuccess"></div>
+<div class="auth-login-screen">
+    <div class="auth-login-wrap">
+        <div class="auth-brand">
+            {{-- logo goes here --}}
         </div>
 
-        <div class="flex items-center justify-end">
-            <flux:button variant="primary" type="submit" class="w-full rounded-xs">{{ __('Log In') }}</flux:button>
-        </div>
-    </form>
+        <div class="login">
+            <h1>Login</h1>
+            <div class="login-divider"></div>
 
+            <form wire:submit="login" class="login-form">
+                <x-auth-session-status class="text-center w-full text-sm text-red-300" :status="session('status')" />
 
-    @if (Route::has('password.request'))
-        <div class="space-x-1 rtl:space-x-reverse text-center text-xs font-medium">
-            <flux:link class="text-accent" :href="route('password.request')">{{ __('Forgot your password?') }}</flux:link>
-        </div>
-    @endif
+                <label class="field-wrap">
+                    <i class="fa fa-user-o field-icon" aria-hidden="true"></i>
+                    <input wire:model="email" type="email" autocomplete="email" required placeholder="Your Email" class="field-input">
+                </label>
 
-    @if (Route::has('register'))
-        <div class="space-x-1 rtl:space-x-reverse text-center text-xs text-zinc-700 font-medium mb-3">
-            {{ __('Don\'t have an account?') }}
-            <flux:link class="text-accent" :href="route('register')">{{ __('Sign Up') }}</flux:link>
-        </div>
-    @endif
+                <label class="field-wrap">
+                    <i class="fa fa-lock field-icon" aria-hidden="true"></i>
+                    <input wire:model="password" type="password" autocomplete="current-password" required placeholder="Password"
+                        class="field-input field-input-password">
+                    <button type="button" class="field-toggle" aria-label="Toggle password visibility" tabindex="-1">
+                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                    </button>
+                </label>
 
-    <div class="relative border border-gray-400 p-4 rounded-xs mb-4">
-        <div class="absolute -top-2 bg-white px-2">
-            <h5 class="text-zinc-700 font-bold text-xs">RISK WARNING:</h5>
-        </div>
-        <div>
-            <p class="text-gray-400 text-xs font-medium leading-[17px]">
-                All trading involves risk. Only risk capital you're prepared to lose.
-            </p>
+                <div class="captcha-wrap captcha-wrap-left">
+                    <div wire:ignore class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.key') }}"></div>
+                </div>
+
+                @if (Route::has('password.request'))
+                    <p class="meta-line">
+                        Forgot password?
+                        <a wire:navigate href="{{ route('password.request') }}">Reset Password</a>
+                    </p>
+                @endif
+
+                @if (Route::has('register'))
+                    <p class="meta-line meta-line-lg">
+                        Don't have an account?
+                        <a wire:navigate href="{{ route('register') }}">Sign Up</a>
+                    </p>
+                @endif
+
+                <button type="submit" class="login-submit">Login</button>
+            </form>
         </div>
     </div>
 </div>

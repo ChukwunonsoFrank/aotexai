@@ -49,7 +49,7 @@
                         <div>
                             <div class="relative">
                                 <input id="address" type="text" id="hs-trailing-icon" name="hs-trailing-icon"
-                                    class="py-2.5 sm:py-3 px-4 pe-11 block w-full bg-white border-gray-200 rounded-lg font-mono font-semibold text-sm focus:outline-none disabled:opacity-50 disabled:pointer-events-none"
+                                    class="py-2.5 sm:py-3 px-4 pe-11 block w-full bg-white text-black border-gray-200 rounded-lg font-mono font-semibold text-sm focus:outline-none disabled:opacity-50 disabled:pointer-events-none"
                                     value="{{ $this->address }}" readonly>
                                 <div x-on:click="$store.confirmDepositPage.copyWalletAddress()"
                                     class="absolute inset-y-0 end-0 flex items-center cursor-pointer z-20 pe-4">

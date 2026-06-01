@@ -140,6 +140,33 @@
                             </div>
                         </div>
                     </a>
+                    <a href="{{ route('settings.security') }}">
+                        <div class="bg-trade w-full rounded-sm flex flex-col space-y-2 p-3 mb-3 lg:mb-0">
+                            <div class="flex items-center space-x-2">
+                                <div class="flex-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                                        viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-lock-keyhole-icon lucide-lock-keyhole">
+                                        <circle cx="12" cy="16" r="1" />
+                                        <rect x="3" y="10" width="18" height="12" rx="2" />
+                                        <path d="M7 10V7a5 5 0 0 1 10 0v3" />
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-semibold text-sm text-white">Security</p>
+                                </div>
+                                <div class="flex-none text-end">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                     <a href="{{ route('dashboard.referrals') }}">
                         <div class="bg-trade w-full rounded-sm flex flex-col space-y-2 p-3 mb-3 lg:mb-0">
                             <div class="flex items-center space-x-2">

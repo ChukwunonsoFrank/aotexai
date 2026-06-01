@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -20,90 +21,114 @@ use Livewire\Component;
 
 class Login extends Component
 {
-  #[Validate('required|string|email')]
-  public string $email = '';
+    #[Validate('required|string|email')]
+    public string $email = '';
 
-  #[Validate('required|string')]
-  public string $password = '';
+    #[Validate('required|string')]
+    public string $password = '';
 
-  public bool $remember = false;
+    public bool $remember = false;
 
-  public $gRecaptchaResponse;
+    public $gRecaptchaResponse;
 
-  /**
-   * Handle an incoming authentication request.
-   */
-  public function login()
-  {
-    try {
-      if (is_null($this->gRecaptchaResponse)) {
-        $this->dispatch('login-error', message: 'Please confirm you are not a robot.')->self();
-      }
+    /**
+     * Handle an incoming authentication request.
+     */
+    public function login()
+    {
+        try {
+            // if (is_null($this->gRecaptchaResponse)) {
+            //   $this->dispatch('login-error', message: 'Please confirm you are not a robot.')->self();
+            // }
 
-      $recatpchaResponse = Http::get("https://www.google.com/recaptcha/api/siteverify", [
-        'secret' => config('services.recaptcha.secret'),
-        'response' => $this->gRecaptchaResponse
-      ]);
+            // $recatpchaResponse = Http::get("https://www.google.com/recaptcha/api/siteverify", [
+            //   'secret' => config('services.recaptcha.secret'),
+            //   'response' => $this->gRecaptchaResponse
+            // ]);
 
-      $result = $recatpchaResponse->json();
+            // $result = $recatpchaResponse->json();
 
-      if ($recatpchaResponse->successful() && $result['success'] == true) {
-        $this->validate();
+            // if ($recatpchaResponse->successful() && $result['success'] == true) {
+            $this->validate();
 
-        $this->ensureIsNotRateLimited();
+            $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-          RateLimiter::hit($this->throttleKey());
+            $user = User::where('email', $this->email)->first();
 
-          throw ValidationException::withMessages([
-            'email' => __('auth.failed'),
-          ]);
+            if ($user && $user->two_factor_enabled) {
+                if (! Auth::validate(['email' => $this->email, 'password' => $this->password])) {
+                    RateLimiter::hit($this->throttleKey());
+
+                    throw ValidationException::withMessages([
+                        'email' => __('auth.failed'),
+                    ]);
+                }
+
+                RateLimiter::clear($this->throttleKey());
+
+                session([
+                    'login_2fa.user_id' => $user->id,
+                    'login_2fa.remember' => $this->remember,
+                ]);
+
+                $this->redirectRoute('login.2fa');
+
+                return;
+            }
+
+            if (! Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+                RateLimiter::hit($this->throttleKey());
+
+                throw ValidationException::withMessages([
+                    'email' => __('auth.failed'),
+                ]);
+            }
+
+            RateLimiter::clear($this->throttleKey());
+            Session::forget('login_2fa');
+            Session::regenerate();
+
+            session()->flash('just_logged_in', true);
+
+            if (Auth::user()->is_admin) {
+                return redirect('/admin/dashboard');
+            }
+
+            $this->redirectIntended(default: route('dashboard', absolute: false));
+            // } else {
+            //   $this->dispatch('login-error', message: 'Please confirm you are not a robot.')->self();
+            // }
+        } catch (\Exception $e) {
+            $this->dispatch('login-error', message: $e->getMessage())->self();
+        }
+    }
+
+    /**
+     * Ensure the authentication request is not rate limited.
+     */
+    protected function ensureIsNotRateLimited(): void
+    {
+        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+            return;
         }
 
-        RateLimiter::clear($this->throttleKey());
-        Session::regenerate();
+        event(new Lockout(request()));
 
-        session()->flash('just_logged_in', true);
+        $seconds = RateLimiter::availableIn($this->throttleKey());
 
-        if (Auth::user()->is_admin) {
-          return redirect('/admin/dashboard');
-        }
-
-        $this->redirectIntended(default: route('dashboard', absolute: false));
-      } else {
-        $this->dispatch('login-error', message: 'Please confirm you are not a robot.')->self();
-      }
-    } catch (\Exception $e) {
-      $this->dispatch('login-error', message: $e->getMessage())->self();
-    }
-  }
-
-  /**
-   * Ensure the authentication request is not rate limited.
-   */
-  protected function ensureIsNotRateLimited(): void
-  {
-    if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
-      return;
+        throw ValidationException::withMessages([
+            'email' => __('auth.throttle', [
+                'seconds' => $seconds,
+                'minutes' => ceil($seconds / 60),
+            ]),
+        ]);
     }
 
-    event(new Lockout(request()));
-
-    $seconds = RateLimiter::availableIn($this->throttleKey());
-
-    throw ValidationException::withMessages([
-      'email' => __('auth.throttle', [
-        'seconds' => $seconds,
-        'minutes' => ceil($seconds / 60),
-      ]),
-    ]);
-  }
-
-  /**
-   * Get the authentication rate limiting throttle key.
-   */
-  protected function throttleKey(): string
-  {
-    return Str::transliterate(Str::lower($this->email) . '|' . request()->ip());
-  }
+    /**
+     * Get the authentication rate limiting throttle key.
+     */
+    protected function throttleKey(): string
+    {
+        return Str::transliterate(Str::lower($this->email).'|'.request()->ip());
+    }
 }

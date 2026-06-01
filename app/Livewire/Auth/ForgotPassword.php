@@ -7,7 +7,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 
-#[Layout('components.layouts.landing-page')]
+#[Layout('components.layouts.auth.layout')]
 
 #[Title('Forgot Password')]
 

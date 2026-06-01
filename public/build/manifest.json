@@ -1,19 +1,24 @@
 {
-  "public/assets/images/about-us-hero-background.jpg": {
+  "public/homepage/assets/images/about-us-hero-background.jpg": {
     "file": "assets/about-us-hero-background-t0ZnfXMR.jpg",
-    "src": "public/assets/images/about-us-hero-background.jpg"
+    "src": "public/homepage/assets/images/about-us-hero-background.jpg"
   },
-  "public/assets/images/about-us-trades-per-day-background.jpg": {
+  "public/homepage/assets/images/about-us-trades-per-day-background.jpg": {
     "file": "assets/about-us-trades-per-day-background--BWyLZDa.jpg",
-    "src": "public/assets/images/about-us-trades-per-day-background.jpg"
+    "src": "public/homepage/assets/images/about-us-trades-per-day-background.jpg"
   },
-  "public/assets/images/banner-background.jpg": {
+  "public/homepage/assets/images/banner-background.jpg": {
     "file": "assets/banner-background-9-2Xs4XT.jpg",
-    "src": "public/assets/images/banner-background.jpg"
+    "src": "public/homepage/assets/images/banner-background.jpg"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CqJYyB8M.css",
+    "file": "assets/app-DKo8XJpN.css",
     "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/custom.css": {
+    "file": "assets/custom-Bv8rfzhn.css",
+    "src": "resources/css/custom.css",
     "isEntry": true
   },
   "resources/js/app.js": {

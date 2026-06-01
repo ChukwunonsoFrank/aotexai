@@ -1,0 +1,219 @@
+/* Desktop (default) - Bottom Ribbon */
+.reward-sticky-button-container {
+    position: fixed;
+
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+
+    background: transparent;
+    pointer-events: auto;
+}
+
+.reward-sticky-button-background {
+    display: none;
+}
+
+.reward-sticky-button-wrapper {
+    position: relative;
+    width: 100%;
+    background: #0d6efd;
+    padding: 24px 0;
+    text-align: center;
+}
+
+.reward-sticky-button {
+    display: inline-block;
+    color: var(--primary-background-color) !important;
+    background-color: transparent;
+    border-radius: 0;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+}
+
+.get-app-sticky-button {
+    display: inline-block;
+    color: var(--primary-background-color) !important;
+    background-color: transparent;
+    border-radius: 0;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.sticky-lottie {
+    position: absolute;
+    margin-right: 20px;
+    height: 40px;
+    z-index: 0;
+    pointer-events: none;
+}
+.trade-money-text-title{
+    margin-left: 50px;
+}
+
+/* Text styling - Desktop */
+.text-main {
+    display: flex;
+    align-items: center;
+    position: relative;
+/*    padding-left: 60px;*/
+}
+
+.trade-money-text {
+    font-size: 24px;
+    font-weight: 600;
+    padding-right: 16px;
+    position: relative;
+    transition: transform 0.25s ease-in-out;
+}
+
+.get-app-text {
+    font-size: 24px;
+    font-weight: 600;
+    position: relative;
+    transition: transform 0.25s ease-in-out;
+    text-align: center !important;
+}
+
+.sticky-slide{
+
+}
+
+.sticky-slide.slide-down-exit{
+    /*transform: translateY(100%);*/
+
+}
+.sticky-slide.slide-down-enter{
+    /*transform: translateY(-100%);*/
+
+}
+.sticky-slide.active{
+    /*transform: translateY(0);*/
+
+}
+
+
+/*.trade-money-text.slide-down-exit {*/
+/*    transform: translateY(100%);*/
+/*}*/
+/*.trade-money-text.slide-down-enter {*/
+/*    transform: translateY(-100%);*/
+/*}*/
+/*.trade-money-text.active {*/
+/*    transform: translateY(0);*/
+/*}*/
+/*.deposit-text.slide-down-exit {*/
+/*    transform: translateY(100%);*/
+/*}*/
+/*.deposit-text.slide-down-enter {*/
+/*    transform: translateY(-100%);*/
+/*}*/
+/*.deposit-text.active{*/
+/*    transform: translateY(0);*/
+/*}*/
+
+.trade-money-text::after {
+    content: "-";
+    position: absolute;
+    right: 2px;
+    font-weight: 400;
+}
+
+.deposit-text {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/* Mobile (max-width: 1080px) - Floating Button */
+@media (max-width: 1080px) {
+    .reward-sticky-button-container {
+        align-items: flex-end;
+        padding: 0 20px 25px;
+    }
+
+    .reward-sticky-button-background {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 140px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.35) 20%, rgba(0, 0, 0, 0.5) 40%, rgba(0, 0, 0, 0.75) 100%);
+        z-index: 999;
+    }
+
+    .reward-sticky-button-wrapper {
+        width: 100%;
+        max-width: 500px;
+        padding: 0;
+        background: transparent;
+        z-index: 1000;
+    }
+
+    .reward-sticky-button {
+        width: 100%;
+        max-width: 500px;
+        padding: 16px 0px 16px 0px;
+        border-radius: 15px;
+        background: #0d6efd;
+        margin: 0 auto;
+        text-align: left;
+    }
+
+    .get-app-sticky-button {
+        width: 100%;
+        max-width: 500px;
+        padding: 16px 0px 16px 0px;
+        border-radius: 15px;
+        background: #0d6efd;
+        margin: 0 auto;
+        text-align: center;
+        color:white!;
+    }
+
+    .sticky-lottie {
+        position: absolute;
+        margin-right: 20px;
+        height: 28px;
+        z-index: 0;
+        pointer-events: none;
+    }
+    .trade-money-text-title{
+        margin-left: 35px;
+    }
+
+    /* Text styling - Mobile */
+    .text-main {
+        flex-direction: column;
+        padding-left: 0;
+    }
+
+    .trade-money-text {
+        font-size: 18px !important;
+        padding-right:16px;
+        padding-left: 16px;
+        text-align: center;
+    }
+
+    .get-app-text {
+        font-size: 18px !important;
+        text-align: center !important;
+    }
+
+    .trade-money-text::after {
+        content: none;
+    }
+
+    .deposit-text {
+        font-size: 16px !important;
+        text-align: center;
+    }
+}

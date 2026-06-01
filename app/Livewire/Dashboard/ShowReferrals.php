@@ -11,57 +11,54 @@ use Livewire\Component;
 
 class ShowReferrals extends Component
 {
-  public $perPage = 10;
+    public $totalCommissions;
 
-  public $visibleCount;
-
-  public $totalReferrals;
-
-  public $totalCommissions;
-
-  public function mount()
-  {
-    $this->totalReferrals = Referral::where('user_id', auth()->user()->id)->count();
-    $this->visibleCount = min($this->perPage, $this->totalReferrals);
-    $this->totalCommissions = Referral::where('user_id', auth()->user()->id)->sum('amount');
-  }
-
-  public function loadMore(): void
-  {
-    $this->visibleCount = min($this->visibleCount + $this->perPage, $this->totalReferrals);
-  }
-
-  public function getLevelPercentage(string $level)
-  {
-    if ($level === '1') {
-      return '5%';
+    public function mount()
+    {
+        $this->totalCommissions = Referral::where('user_id', auth()->user()->id)->sum('amount');
     }
 
-    if ($level === '2') {
-      return '2%';
+    public function render()
+    {
+        $user = auth()->user();
+
+        $level1Referrals = User::query()
+            ->select(['name', 'referral_code'])
+            ->where('referred_by', $user->referral_code)
+            ->latest()
+            ->get();
+
+        $level1Downlines = $level1Referrals->pluck('name')->all();
+        $level1Codes = $level1Referrals->pluck('referral_code')->filter()->values();
+
+        $level2Referrals = User::query()
+            ->select(['name', 'referral_code'])
+            ->when(
+                $level1Codes->isNotEmpty(),
+                fn($query) => $query->whereIn('referred_by', $level1Codes),
+                fn($query) => $query->whereRaw('1 = 0')
+            )
+            ->latest()
+            ->get();
+
+        $level2Downlines = $level2Referrals->pluck('name')->all();
+        $level2Codes = $level2Referrals->pluck('referral_code')->filter()->values();
+
+        $level3Downlines = User::query()
+            ->select(['name'])
+            ->when(
+                $level2Codes->isNotEmpty(),
+                fn($query) => $query->whereIn('referred_by', $level2Codes),
+                fn($query) => $query->whereRaw('1 = 0')
+            )
+            ->latest()
+            ->pluck('name')
+            ->all();
+
+        return view('livewire.dashboard.show-referrals', [
+            'level1Downlines' => $level1Downlines,
+            'level2Downlines' => $level2Downlines,
+            'level3Downlines' => $level3Downlines,
+        ]);
     }
-
-    if ($level === '3') {
-      return '1%';
-    }
-  }
-
-  public function render()
-  {
-    $referrals = Referral::with('user')->where('user_id', auth()->user()->id)->latest()->take($this->visibleCount)->get();
-
-    $referralCodes = $referrals->pluck('referral_code')->unique()->filter();
-    $refereesByCode = User::whereIn('referral_code', $referralCodes)->pluck('name', 'referral_code');
-
-    $referrals->each(function ($referral) use ($refereesByCode) {
-      $referral->referee_name = $refereesByCode[$referral->referral_code] ?? 'Unknown';
-    });
-
-    $showLoadMoreButton = $this->visibleCount < $this->totalReferrals;
-
-    return view('livewire.dashboard.show-referrals', [
-      'referrals' => $referrals,
-      'showLoadMoreButton' => $showLoadMoreButton,
-    ]);
-  }
 }
