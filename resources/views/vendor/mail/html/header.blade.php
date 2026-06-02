@@ -2,8 +2,8 @@
 <tr>
 <td class="header">
 <a href="{{ $url }}" style="display: inline-block;">
-@if (trim($slot) === 'Bullfex')
-<img width="120" src="{{ asset('assets/logo.png') }}" alt="Bullfex Logo">
+@if (trim($slot) === 'Aotexai')
+<img width="50" src="{{ asset('/images/aotexailogo.png') }}" alt="Aotexai Logo">
 @else
 {{ $slot }}
 @endif

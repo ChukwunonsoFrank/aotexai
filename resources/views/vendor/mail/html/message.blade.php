@@ -21,11 +21,13 @@
 {{-- Footer --}}
 <x-slot:footer>
 <x-mail::footer>
-© {{ date('Y') }} Bullfex Technologies Ltd. All rights reserved.
+© {{ date('Y') }} Aotexai. All rights reserved.
 
-If you would like to find out more about which Bullfex Technologies entity you receive services from, please reach out to us via the in-dashboard support.
+<a href="#">150 Frazer hills Street, 1150 Vishon, Austria.</a>
 
-"Bullfex" is trademark of Bullfex Technologies Ltd with the registered address at 12 Auckland Street, 1130 Vienna, Austria
+<br><br>
+<a href="https://aotexai.com" target="_blank" rel="noopener noreferrer">www.aotexai.com</a> | <a href="mailto:support@aotexai.com">support@aotexai.com</a>
+
 </x-mail::footer>
 </x-slot:footer>
 </x-mail::layout>
