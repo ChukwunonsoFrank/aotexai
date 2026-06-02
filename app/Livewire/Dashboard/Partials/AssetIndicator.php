@@ -22,20 +22,20 @@ class AssetIndicator extends Component
     {
         $this->activeBot = Bot::where(['user_id' => auth()->user()->id, 'status' => 'active'])->first();
 
-        if($this->activeBot) {
+        if ($this->activeBot) {
             $this->assetImageUrl = $this->activeBot['asset_image_url'];
             $this->asset = $this->activeBot['asset'];
             $this->assetClass = $this->activeBot['asset_class'];
             $this->isBotActive = true;
         } else {
-            $this->assetImageUrl = 'assets/logomark.png';
+            $this->assetImageUrl = 'images/aotexailogo.png';
             $this->asset = 'No data';
             $this->assetClass = 'No data';
             $this->isBotActive = false;
         }
     }
 
-    #[On('asset-updated')] 
+    #[On('asset-updated')]
     public function assetUpdated($data)
     {
         $this->assetImageUrl = $data['assetImageUrl'];

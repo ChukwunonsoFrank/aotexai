@@ -1,7 +1,9 @@
 <div class="auth-login-screen">
     <div class="auth-login-wrap">
         <div class="auth-brand">
-            {{-- logo goes here --}}
+            <img src="/images/aotexailogo.png" loading="eager"
+                alt="{{ config('mail.APP_NAME') }} logo, the platform for crypto trading and automated bots." style="width: 40px" alt="">
+            <span class="brand-text">AOTEXAI</span>
         </div>
 
         <div class="login">

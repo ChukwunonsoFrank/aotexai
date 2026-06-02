@@ -44,8 +44,8 @@
 
 @layer theme {
     .dashboard-theme {
-        --color-accent: #25258e;
-        --color-accent-hover: #2e2eb2;
+        --color-accent: #0d6efd;
+        --color-accent-hover: #00eefd;
         --color-accent-content: var(--color-neutral-800);
         --color-accent-foreground: var(--color-white);
     }

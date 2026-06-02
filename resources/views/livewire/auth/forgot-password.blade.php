@@ -1,12 +1,9 @@
 <div class="auth-login-screen">
     <div class="auth-login-wrap">
         <div class="auth-brand">
-            <svg class="brand-mark" viewBox="0 0 72 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M10 47L31 11L43 17" />
-                <path d="M17 49L59 47" />
-                <path d="M17 42C31 39 43 34 58 29" />
-            </svg>
-            <span class="brand-text">AOITEXAI</span>
+            <img src="/images/aotexailogo.png" loading="eager"
+                alt="{{ config('mail.APP_NAME') }} logo, the platform for crypto trading and automated bots." style="width: 40px" alt="">
+            <span class="brand-text">AOTEXAI</span>
         </div>
 
         <div class="login">

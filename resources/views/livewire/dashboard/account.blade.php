@@ -1,4 +1,4 @@
-<div class="px-4 lg:px-0 h-full">
+<div x-data class="px-4 lg:px-0 h-full">
     <div class="lg:flex lg:h-full">
         <livewire:dashboard.partials.desktop-navbar />
         <div class="lg:h-full lg:flex-1 lg:px-80 lg:pt-6">
@@ -187,6 +187,26 @@
                             </div>
                         </div>
                     </a>
+                    <a x-on:click="$store.accountPage.toggleSupportModal()">
+                        <div class="bg-trade w-full rounded-sm flex flex-col space-y-2 p-3 mb-3 lg:mb-0">
+                            <div class="flex items-center space-x-2">
+                                <div class="flex-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-icon lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-semibold text-sm text-white">Support</p>
+                                </div>
+                                <div class="flex-none text-end">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round"
+                                        class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
                     <form method="POST" action="{{ route('logout') }}" class="w-full">
                         @csrf
                         <a class="cursor-pointer" onclick="this.closest('form').submit()">
@@ -219,6 +239,41 @@
                     </form>
                 </div>
             </div>
+
+            <div x-cloak x-show="$store.accountPage.isSupportModalOpen" x-transition
+                class="fixed top-0 left-0 h-svh w-full bg-dashboard z-20 flex flex-col">
+                <div class="flex items-center px-4 py-4 border-y border-[#26252a]">
+                    <div class="flex-1">
+                        <h1 class="text-white text-base font-bold">Support</h1>
+                    </div>
+                    <div class="flex-none">
+                        <svg x-on:click="$store.accountPage.toggleSupportModal()" xmlns="http://www.w3.org/2000/svg"
+                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-x-icon lucide-x cursor-pointer">
+                            <path d="M18 6 6 18" />
+                            <path d="m6 6 12 12" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="grow">
+                    <iframe frameborder="0" width="100%" height="100%"
+                        src="https://jivo.chat/HjwhNMiL2E"></iframe>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        if (!Alpine.store('accountPage')) {
+            Alpine.store('accountPage', {
+                isSupportModalOpen: false,
+                toggleSupportModal() {
+                    this.isSupportModalOpen = !this.isSupportModalOpen;
+                }
+            });
+        }
+    });
+</script>

@@ -158,9 +158,9 @@
                                 src="/homepage/assets/img/logo.png" loading="eager"
                                 alt="{{ config('mail.APP_NAME') }} logo, the platform for crypto trading and automated bots."
                                 class="image-31 !w-[150px]" /> --}}
-                            <img src="/images/aoitexaiwhitelogo.png" loading="eager"
+                            <img src="/images/aotexailogo.png" loading="eager"
                                 alt="{{ config('mail.APP_NAME') }} logo, the platform for crypto trading and automated bots." style="width: 40px" alt="">
-                            <span>AOITEXAI</span>
+                            <span>AOTEXAI</span>
 
                         </div>
                     </a>
@@ -273,9 +273,9 @@
                     <div b-hri9lm5c95>
                         <a b-hri9lm5c95 href="/" style="display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: bold;">
 
-                             <img src="/images/aoitexaiwhitelogo.png" loading="eager"
+                             <img src="/images/aotexailogo.png" loading="eager"
                                     alt="{{ config('mail.APP_NAME') }} logo, the platform for crypto trading and automated bots." style="width: 40px" alt="">
-                                <span>AOITEXAI</span>
+                                <span>AOTEXAI</span>
                         </a>
                     </div>
                     {{-- <div b-hri9lm5c95 class="network-div">
