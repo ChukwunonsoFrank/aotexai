@@ -18,11 +18,11 @@
                     <input wire:model="email" type="email" autocomplete="email" required placeholder="Your Email" class="field-input">
                 </label>
 
-                <label class="field-wrap">
+                <label class="field-wrap field-wrap-password">
                     <i class="fa fa-lock field-icon" aria-hidden="true"></i>
                     <input wire:model="password" type="password" autocomplete="current-password" required placeholder="Password"
-                        class="field-input field-input-password">
-                    <button type="button" class="field-toggle" aria-label="Toggle password visibility" tabindex="-1">
+                        class="field-input field-input-password js-password-input">
+                    <button type="button" class="field-toggle js-password-toggle" aria-label="Show password" aria-pressed="false">
                         <i class="fa fa-eye-slash" aria-hidden="true"></i>
                     </button>
                 </label>

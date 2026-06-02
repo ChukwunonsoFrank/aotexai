@@ -63,12 +63,47 @@
             });
         }
 
+        function initializePasswordToggles() {
+            document.querySelectorAll('.field-wrap-password').forEach((fieldWrap) => {
+                if (fieldWrap.dataset.passwordToggleBound === 'true') {
+                    return;
+                }
+
+                const input = fieldWrap.querySelector('.js-password-input');
+                const button = fieldWrap.querySelector('.js-password-toggle');
+                const icon = button?.querySelector('i');
+
+                if (!input || !button || !icon) {
+                    return;
+                }
+
+                const syncState = () => {
+                    const isVisible = input.type === 'text';
+
+                    icon.classList.toggle('fa-eye', isVisible);
+                    icon.classList.toggle('fa-eye-slash', !isVisible);
+                    button.setAttribute('aria-label', isVisible ? 'Hide password' : 'Show password');
+                    button.setAttribute('aria-pressed', String(isVisible));
+                };
+
+                button.addEventListener('click', () => {
+                    input.type = input.type === 'password' ? 'text' : 'password';
+                    syncState();
+                });
+
+                fieldWrap.dataset.passwordToggleBound = 'true';
+                syncState();
+            });
+        }
+
         function onAuthRecaptchaApiLoad() {
             renderAuthRecaptchas();
         }
 
         document.addEventListener('DOMContentLoaded', renderAuthRecaptchas);
+        document.addEventListener('DOMContentLoaded', initializePasswordToggles);
         document.addEventListener('livewire:navigated', renderAuthRecaptchas);
+        document.addEventListener('livewire:navigated', initializePasswordToggles);
     </script>
     <script src="https://www.google.com/recaptcha/api.js?onload=onAuthRecaptchaApiLoad&render=explicit" async defer></script>
 </head>
