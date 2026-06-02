@@ -21,7 +21,7 @@
                         </div>
                         <div class="flex items-center space-x-2">
                             <div class="flex-none">
-                                <img class="md:w-7" src="{{ asset('storage/' .$this->getPaymentMethodIconUrl($withdrawal['payment_method'])) }}" alt="">
+                                <img class="md:w-7" src="{{ route('public.storage', ['path' => $this->getPaymentMethodIconUrl($withdrawal['payment_method'])]) }}" alt="">
                             </div>
                             <div class="flex-1">
                                 <p class="font-semibold text-xs text-white md:text-sm">{{ $withdrawal['payment_method'] }}</p>

@@ -25,7 +25,7 @@
                         <div x-on:click="$store.depositPage.togglePaymentMethodSelect()"
                             class="flex items-center space-x-3 py-2.5 sm:py-3 px-4 border border-gray-700 bg-navbar rounded-lg text-[#FFFFFF]">
                             <div class="flex-none">
-                                <img src="{{ asset('storage/' . $this->paymentMethod['icon_url']) }}">
+                                <img src="{{ route('public.storage', ['path' => $this->paymentMethod['icon_url']]) }}">
                             </div>
                             <div class="flex-1">
                                 <p class="text-sm">{{ $this->paymentMethod['name'] }}</p>
@@ -51,7 +51,7 @@
                                     x-on:click="$store.depositPage.isPaymentMethodSelectOpen = false"
                                     class="hover:bg-gray-600 cursor-pointer flex items-center space-x-3 px-4 py-2 rounded-md text-[#FFFFFF]">
                                     <div class="flex-none">
-                                        <img src="{{ asset('storage/' . $method['icon_url']) }}">
+                                        <img src="{{ route('public.storage', ['path' => $method['icon_url']]) }}">
                                     </div>
                                     <div class="flex-1">
                                         <p class="text-sm">{{ $method['name'] }}</p>

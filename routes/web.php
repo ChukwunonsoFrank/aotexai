@@ -37,6 +37,7 @@ use App\Livewire\Settings\Security\Setup as SettingsSecuritySetup;
 use App\Livewire\Terms;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/link-storage', function () {
     Artisan::call('storage:link');
@@ -52,6 +53,13 @@ Route::get('/cache', function () {
     Artisan::call('optimize');
     dd('cached');
 });
+
+Route::get('/media/{path}', function (string $path) {
+    abort_if(str_contains($path, '..'), 404);
+    abort_unless(Storage::disk('public')->exists($path), 404);
+
+    return Storage::disk('public')->response($path);
+})->where('path', '.*')->name('public.storage');
 
 Route::get('/', Homepage::class)->name('home');
 Route::get('/about', About::class)->name('about');
