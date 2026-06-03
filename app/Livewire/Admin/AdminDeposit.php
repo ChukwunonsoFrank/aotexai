@@ -84,7 +84,7 @@ class AdminDeposit extends Component
 
     private function payoutLevel1(float $depositAmount, string $referralCode, string $depositOwnerName)
     {
-        $commission = intval(round($depositAmount * (5 / 100)));
+        $commission = intval(round($depositAmount * (10 / 100)));
 
         // Use lockForUpdate to prevent race conditions
         $firstUpline = User::where('id', $this->firstUpline['id'])->lockForUpdate()->first();
@@ -104,8 +104,8 @@ class AdminDeposit extends Component
 
     private function payoutLevel2(float $depositAmount, string $referralCode, string $depositOwnerName)
     {
-        // Middle upline commission (5%)
-        $commission = intval(round($depositAmount * (5 / 100)));
+        // Middle upline commission (10%)
+        $commission = intval(round($depositAmount * (10 / 100)));
 
         $secondUpline = User::where('id', $this->secondUpline['id'])->lockForUpdate()->first();
         $newSecondUplineBalance = $secondUpline->live_balance + ($commission * 100);
@@ -121,8 +121,8 @@ class AdminDeposit extends Component
 
         $secondUpline->notify(new CommissionEarned($secondUpline->name, $depositOwnerName, strval($commission)));
 
-        // First upline commission (2%)
-        $commission = intval(round($depositAmount * (2 / 100)));
+        // First upline commission (6%)
+        $commission = intval(round($depositAmount * (6 / 100)));
 
         $firstUpline = User::where('id', $this->firstUpline['id'])->lockForUpdate()->first();
         $newFirstUplineBalance = $firstUpline->live_balance + ($commission * 100);
@@ -141,8 +141,8 @@ class AdminDeposit extends Component
 
     private function payoutLevel3(float $depositAmount, string $referralCode, string $depositOwnerName)
     {
-        // Top upline commission (1%)
-        $commission = intval(round($depositAmount * (1 / 100)));
+        // Top upline commission (4%)
+        $commission = intval(round($depositAmount * (4 / 100)));
 
         $firstUpline = User::where('id', $this->firstUpline['id'])->lockForUpdate()->first();
         $newFirstUplineBalance = $firstUpline->live_balance + ($commission * 100);
@@ -158,8 +158,8 @@ class AdminDeposit extends Component
 
         $firstUpline->notify(new CommissionEarned($firstUpline->name, $depositOwnerName, strval($commission)));
 
-        // Middle upline commission (2%)
-        $commission = intval(round($depositAmount * (2 / 100)));
+        // Middle upline commission (6%)
+        $commission = intval(round($depositAmount * (6 / 100)));
 
         $secondUpline = User::where('id', $this->secondUpline['id'])->lockForUpdate()->first();
         $newSecondUplineBalance = $secondUpline->live_balance + ($commission * 100);
@@ -175,8 +175,8 @@ class AdminDeposit extends Component
 
         $secondUpline->notify(new CommissionEarned($secondUpline->name, $depositOwnerName, strval($commission)));
 
-        // Last upline commission (5%)
-        $commission = intval(round($depositAmount * (5 / 100)));
+        // Last upline commission (10%)
+        $commission = intval(round($depositAmount * (10 / 100)));
 
         $thirdUpline = User::where('id', $this->thirdUpline['id'])->lockForUpdate()->first();
         $newThirdUplineBalance = $thirdUpline->live_balance + ($commission * 100);

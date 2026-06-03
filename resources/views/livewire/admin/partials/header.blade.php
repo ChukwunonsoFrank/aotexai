@@ -35,7 +35,7 @@
             <!-- Hamburger Toggle BTN -->
 
             <a href="index.html" class="lg:hidden">
-                <img class="w-12" src="{{ asset('assets/logomark.png') }}" alt="Logo" />
+                <img class="w-12" src="{{ asset('images/aotexailogo.png') }}" alt="Logo" />
             </a>
 
             <!-- Application nav menu button -->

@@ -278,35 +278,8 @@
                                 <span>AOTEXAI</span>
                         </a>
                     </div>
-                    {{-- <div b-hri9lm5c95 class="network-div">
-                        <a b-hri9lm5c95 href="https://www.instagram.com/50k_trade" target="_blank">
-                            <img b-hri9lm5c95 class="network-icon"
-                                src="https://cdn.50k.trade/website/icons/instagram-icon-v2.svg" alt="instagram Icon"
-                                loading="lazy" />
-                        </a>
-                        <a b-hri9lm5c95 href="https://www.tiktok.com/@50k_trade" target="_blank">
-                            <img b-hri9lm5c95 class="network-icon" src="https://cdn.50k.trade/website/icons/tiktok.svg"
-                                alt="Tiktok Icon" loading="lazy" />
-                        </a>
-                        <a b-hri9lm5c95 href="https://x.com/50K_trade" target="_blank">
-                            <img b-hri9lm5c95 class="network-icon" src="https://cdn.50k.trade/website/icons/X.svg"
-                                alt="X Icon" loading="lazy" />
-                        </a>
-                    </div>
-                    <div b-hri9lm5c95 class="network-div">
-                        <a b-hri9lm5c95 href="https://www.facebook.com/50K.TRADE" target="_blank">
-                            <img b-hri9lm5c95 class="network-icon"
-                                src="https://cdn.50k.trade/website/icons/facebook-icon-v2.svg" alt="Facebook Icon"
-                                loading="lazy" />
-                        </a>
-                        <a b-hri9lm5c95 href="https://youtube.com/@50k_trade?si=BYbirkEAyO9VTDq_" target="_blank">
-                            <img b-hri9lm5c95 class="network-icon"
-                                src="https://cdn.50k.trade/website/icons/youtube-icon-v2.svg" alt="Youtube Icon"
-                                loading="lazy" />
-                        </a>
-                    </div> --}}
                     <div b-hri9lm5c95 class="social-icons !gap-3">
-                        <a b-hri9lm5c95 href="/aoitexaiapp.apk" class="store_link_button !mt-3">
+                        <a b-hri9lm5c95 href="#" class="store_link_button !mt-3">
                             <img b-hri9lm5c95 class="social-icon !p-0" src="/images/google.PNG"
                                 alt="Appstore" loading="lazy" />
                         </a>
@@ -348,13 +321,13 @@
             150 Frazer hills Street, </br>
             1150 Vishon,  </br>
             Austria. </br>
-            support{{'@'}}{{ config('mail.APP_NAME') }}.com </br>
+            support@aotexai.com </br>
             Chamber of Commerce number: 8875422
 
         </p>
 
         <p b-hri9lm5c95 class="rights">
-            Copyright © 2025 {{ config('mail.APP_NAME') }}, All rights reserved.
+            Copyright © 2025 Aotexai, All rights reserved.
         </p>
 
         <div b-hri9lm5c95 class="space-400"></div>

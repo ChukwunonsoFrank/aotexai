@@ -29,9 +29,9 @@
                                 Invite users with your referral link and earn deposit commissions through your network.
                             </p>
                             <ul class="list-disc list-inside text-white text-sm space-y-1">
-                                <li>Level 1 (Direct referrals): 5% deposit commission.</li>
-                                <li>Level 2 (Indirect referrals): 2% deposit commission.</li>
-                                <li>Level 3 (Third chain): 1% deposit commission.</li>
+                                <li>Level 1 (Direct referrals): 10% deposit commission.</li>
+                                <li>Level 2 (Indirect referrals): 6% deposit commission.</li>
+                                <li>Level 3 (Third chain): 4% deposit commission.</li>
                             </ul>
                             <div class="text-white text-sm space-y-1">
                                 <p>Example:</p>
@@ -119,7 +119,7 @@
 
                 <div class="flex flex-col border-2 border-[#323335]">
                     <div class="py-3 px-5 bg-dim border-b border-[#323335]">
-                        <p class="text-white text-sm font-bold">Level 1 <span class="text-xs">(5% on deposits)</span></p>
+                        <p class="text-white text-sm font-bold">Level 1 <span class="text-xs">(10% on deposits)</span></p>
                     </div>
                     <div class="px-4 py-8 flex items-center gap-1 flex-wrap">
                         @forelse ($level1Downlines as $downline)
@@ -132,7 +132,7 @@
                     </div>
 
                     <div class="py-3 px-5 bg-dim border-t-2 border-b border-[#323335]">
-                        <p class="text-white text-sm font-bold">Level 2 <span class="text-xs">(2% on deposits)</span></p>
+                        <p class="text-white text-sm font-bold">Level 2 <span class="text-xs">(6% on deposits)</span></p>
                     </div>
                     <div class="px-4 py-8 flex items-center gap-1 flex-wrap">
                         @forelse ($level2Downlines as $downline)
@@ -145,7 +145,7 @@
                     </div>
 
                     <div class="py-3 px-5 bg-dim border-t-2 border-b border-[#323335]">
-                        <p class="text-white text-sm font-bold">Level 3 <span class="text-xs">(1% on deposits)</span></p>
+                        <p class="text-white text-sm font-bold">Level 3 <span class="text-xs">(4% on deposits)</span></p>
                     </div>
                     <div class="px-4 py-8 flex items-center gap-1 flex-wrap">
                         @forelse ($level3Downlines as $downline)
