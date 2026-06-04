@@ -343,15 +343,10 @@
             class="mb-2 w-full h-[80vh] bg-white shadow-xl rounded-lg overflow-hidden border border-gray-300"
         >
             <iframe
-                src="https://tawk.to/chat/68f58872abd1d819558fbc48/1j7vhq0gt"
+                src="https://jivo.chat/AN0hqxJRn4"
                 class="w-full h-full"
                 frameborder="0"
             ></iframe>
-            {{-- <iframe
-                src="https://tawk.to/chat/6894b3e3bd3585192d5d29c3/1j22gu7pt"
-                class="w-full h-full"
-                frameborder="0"
-            ></iframe> --}}
         </div>
 
         <!-- Floating Button -->

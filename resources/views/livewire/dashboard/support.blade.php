@@ -2,7 +2,7 @@
     <div class="lg:flex h-full">
         <livewire:dashboard.partials.desktop-navbar />
         <div class="h-full w-full flex-1 lg:pr-4">
-            <iframe frameborder="0" width="100%" height="100%" src="https://jivo.chat/HjwhNMiL2E"></iframe>
+            <iframe frameborder="0" width="100%" height="100%" src="https://jivo.chat/AN0hqxJRn4"></iframe>
         </div>
     </div>
 
