@@ -71,14 +71,14 @@
                         <label for="input-label" class="block text-xs font-medium mb-2 text-zinc-300">Exchange</label>
                         <div
                             class="w-full text-sm self-center text-center border border-gray-700 py-2.5 sm:py-3 px-4 bg-navbar rounded-md text-[#FFFFFF] focus:outline-0">
-                            <img class="inline" src="{{ asset('assets/icons/cryptodotcom.svg') }}" alt="cryptodotcom-logo">
+                            <img class="inline" src="{{ asset('assets/icons/binance-logo.svg') }}" alt="binance-logo">
                         </div>
                     </div>
                     <div class="flex-1">
                         <label for="input-label" class="block text-xs font-medium mb-2 text-zinc-300">Broker</label>
                         <div
                             class="w-full text-sm self-center text-center border border-gray-700 py-2.5 sm:py-3 px-4 bg-navbar rounded-md text-[#FFFFFF] focus:outline-0">
-                            <img class="inline" src="{{ asset('assets/icons/oanda.svg') }}" alt="oanda-logo">
+                            <img class="inline" src="{{ asset('assets/icons/fxpro.svg') }}" alt="oanda-logo">
                         </div>
                     </div>
                 </div>
