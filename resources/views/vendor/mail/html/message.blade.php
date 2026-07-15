@@ -21,7 +21,7 @@
 {{-- Footer --}}
 <x-slot:footer>
 <x-mail::footer>
-© {{ date('Y') }} Aotexai. All rights reserved.
+© {{ date('Y') }} Cloudspaceaitrading. All rights reserved.
 
 <a href="#">150 Frazer hills Street, 1150 Vishon, Austria.</a>
 

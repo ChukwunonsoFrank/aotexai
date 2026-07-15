@@ -237,7 +237,7 @@ body {
     height: 60px;
     border: 0;
     border-radius: 12px;
-    background: linear-gradient(180deg, #67d7dd 0%, #61c5ca 100%);
+    background: linear-gradient(180deg, #2f7df6 0%, #0d6efd 100%);
     color: #f2f7fb;
     display: flex;
     align-items: center;
@@ -248,12 +248,12 @@ body {
     line-height: 1.2;
     text-align: center;
     white-space: normal;
-    box-shadow: 0 8px 20px rgba(92, 220, 227, 0.34);
+    box-shadow: 0 8px 20px rgba(13, 110, 253, 0.34);
     cursor: pointer;
 }
 
 .login-submit:focus-visible {
-    outline: 3px solid rgba(157, 244, 248, 0.85);
+    outline: 3px solid rgba(13, 110, 253, 0.45);
     outline-offset: 2px;
 }
 

@@ -101,7 +101,7 @@
                         <div class="relative">
                             <input id="referral_link" type="text"
                                 class="py-3 px-4 pe-20 block w-full border-2 border-[#26252a] text-white bg-transparent rounded-lg font-mono font-bold text-xs focus:outline-none disabled:opacity-50 disabled:pointer-events-none"
-                                value="{{ route('register', ['ref' => auth()->user()->referral_code]) }}" readonly>
+                                value="https://cloudspaceaitrading.com/register?ref={{ auth()->user()->referral_code }}" readonly>
                             <div x-on:click="$store.showReferralsPage.copyReferralLink()"
                                 class="absolute inset-y-0 end-0 flex items-center gap-x-2 cursor-pointer z-20 pe-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

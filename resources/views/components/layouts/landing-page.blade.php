@@ -1,454 +1,358 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 
 <head>
-    <!-- Primary meta tags -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{{ ucwords(config('app.name')) }} - AI Trading Platform</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="author" content="{{ config('app.name') }}">
-    <meta name="description"
-        content="Trade 700&#x2B; instruments including stocks and ETFs. Get up to 1:300 leverage, 0% commission, and start risk-free with a free demo account." />
-    <meta name="keywords"
-        content="Trade US Stocks, Global Stocks Trading, 24/5 Stock Trading, Zero Commission Trading, Free Trading Bonus, Short Selling Stocks, Online Stock Trading, Invest in US Stocks, Trade Global Markets, Stock Investment, Index Trading, Trading App, Equity Trading, Stocks, ETFs, Invest, Trade" />
-    <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://{{ config('app.name') }}.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ config('app.name') }}">
-    <meta property="og:description"
-        content="Trade 700&#x2B; instruments including stocks and ETFs. Get up to 1:300 leverage, 0% commission, and start risk-free with a free demo account.">
-    <meta property="og:image" content="https://cdn.{{ config('app.name') }}.com/website/images/AppPreviewIcon.png">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Cloudspaceaitrading">
+    <meta name="description" content="Cloudspaceaitrading is an AI-powered automated trading platform with fast deposits, withdrawals, demo trading, and hands-free trading strategies.">
+    <meta name="keywords" content="AI trading, automated trading, trading bot, forex trading, crypto trading, demo account">
+    <title>Cloudspaceaitrading - AI Trading Platform</title>
 
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="twitter:domain" content="https://{{ config('app.name') }}.com/">
-    <meta property="twitter:url" content="https://{{ config('app.name') }}.com/">
-    <meta name="twitter:title" content="{{ config('app.name') }}">
-    <meta name="twitter:description"
-        content="Trade 700&#x2B; instruments including stocks and ETFs. Get up to 1:300 leverage, 0% commission, and start risk-free with a free demo account.">
+    <link rel="shortcut icon" href="/xtrady/assets/images/logo/favicon.ico">
+    <link rel="stylesheet" href="/xtrady/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/xtrady/assets/css/all.min.css">
+    <link rel="stylesheet" href="/xtrady/assets/fonts/flaticon_xtrade.css">
+    <link rel="stylesheet" href="/xtrady/assets/css/fancybox.css">
+    <link rel="stylesheet" href="/xtrady/assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/xtrady/assets/css/odometer.css">
+    <link rel="stylesheet" href="/xtrady/assets/css/main.css">
 
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            'event': 'locale',
-            'locale': 'Client Country: CY &#xA;Client Language: en &#xA;IP Country: CY &#xA;IP Language: en &#xA;',
-        });
-    </script>
+    @vite([
+        'resources/css/app.css',
+        'resources/css/custom.css',
+        'resources/js/app.js'
+    ])
 
-    <script>
-        document.addEventListener("DOMContentLoaded", async () => {
+    <style>
+        :root {
+            --base: 214 98% 52%;
+            --base-two: 145 65% 49%;
+        }
 
-            const titlesResponse = await fetch('https://50k.trade/Index?handler=StickyButtonTitlesTexts', {
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
-            });
-            const subtitleResponse = await fetch('https://50k.trade/Index?handler=StickyButtonSubtitlesTexts', {
-                headers: { 'X-Requested-With': 'XMLHttpRequest' }
-            });
-            const buttonTitlesTexts = await titlesResponse.json();
-            const buttonSubTitlesTexts = await subtitleResponse.json();
-            console.log(buttonTitlesTexts);
-            console.log(buttonSubTitlesTexts);
+        body {
+            background: #050608;
+        }
 
-            const buttonTitle = document.querySelector(".trade-money-text-title");
-            const buttonSubTitle = document.querySelector(".deposit-text");
-            const textsContainer = document.querySelector(".sticky-slide");
+        .hero-blue-gradient {
+            background:
+                radial-gradient(circle at 76% 42%, rgba(55, 122, 247, 0.34) 0%, rgba(21, 71, 159, 0.23) 34%, rgba(4, 11, 28, 0.08) 62%),
+                linear-gradient(135deg, #061832 0%, #071a3d 42%, #050b17 100%) !important;
+        }
 
-            let currentIndex = 0;
+        .navbar-brand {
+            align-items: center;
+            display: inline-flex;
+        }
 
-            // function animateText() {
-            //     textsContainer.classList.remove("active");
-            //     textsContainer.classList.add("slide-down-exit");
+        .site-logo {
+            display: block;
+            height: 58px;
+            width: auto;
+        }
 
-            //     setTimeout(() => {
-            //         currentIndex = (currentIndex + 1) % buttonTitlesTexts.length;
-            //         buttonTitle.textContent = buttonTitlesTexts[currentIndex];
-            //         buttonSubTitle.textContent = buttonSubTitlesTexts[currentIndex];
-            //         textsContainer.classList.remove("slide-down-exit");
-            //         textsContainer.classList.add("slide-down-enter");
+        .offcanvas-title .site-logo {
+            height: 46px;
+        }
 
-            //         setTimeout(() => {
-            //             textsContainer.classList.remove("slide-down-enter");
-            //             textsContainer.classList.add("active");
-            //         }, 50);
-            //     }, 500);
-            // }
+        .gtranslate-shell {
+            align-items: center;
+            display: flex;
+            min-height: 40px;
+        }
 
-            // buttonTitle.textContent = buttonTitlesTexts[currentIndex];
-            // buttonSubTitle.textContent = buttonSubTitlesTexts[currentIndex];
-            // textsContainer.classList.add("active");
-            // setInterval(animateText, 3500);
+        .landing-legal .privacy-content p,
+        .landing-legal .privacy-content li {
+            color: #b8c0cc;
+            font-size: 16px;
+            line-height: 1.8;
+        }
 
-        });
-    </script>
+        .landing-legal .privacy-content h3,
+        .landing-legal .privacy-content h4 {
+            color: #fff;
+        }
 
-    <!-- Pre-Connects -->
+        .landing-legal .privacy-content a {
+            color: hsl(var(--base));
+        }
 
+        .btn.btn--base,
+        .btn.btn--base-two,
+        .btn.btn-outline--base:hover,
+        .btn.btn-outline--base:focus {
+            color: #07100b !important;
+            opacity: 1 !important;
+        }
 
-    <link
-      href="/images/favicon.png"
-      rel="shortcut icon"
-      type="image/x-icon"
-    />
-    <link
-      href="/images/favicon.png"
-      rel="apple-touch-icon"
-    />
+        .wrapper .btn {
+            align-items: center !important;
+            display: inline-flex !important;
+            gap: 8px;
+            justify-content: center;
+            line-height: 1.1 !important;
+            min-height: 44px;
+            padding: 12px 24px !important;
+            white-space: nowrap;
+        }
 
-    <!-- Fonts -->
-    <link rel="stylesheet"
-        href="/homepage/assets/dist/core.a011f950cd09d011595f.min%EF%B9%96v=Oip6JH82vP1I9t3JtexHFb8RnuydazzE3Bv0IMbQY_U.css" />
+        .wrapper .navbar-main .btn {
+            min-height: 42px;
+            padding: 11px 22px !important;
+        }
 
+        .wrapper .btn i {
+            bottom: auto;
+            line-height: 1;
+            margin-left: 0;
+        }
 
-    <link href="/homepage/assets/styles/reward-sticky-button.css" rel="stylesheet">
+        .wrapper .btn.btn--base-two,
+        .wrapper .btn.btn--base-two:hover,
+        .wrapper .btn.btn--base-two:focus {
+            background-color: hsl(var(--base)) !important;
+            border-color: hsl(var(--base)) !important;
+            color: #fff !important;
+        }
 
-    <link rel="stylesheet"
-        href="/homepage/assets/dist/invest.f65bcb74c8fede431512.min%EF%B9%96v=jc98CmwIHq-zri0Z4BQtDxrITQorrpf3C-m3MkUblt4.css" />
-    <link rel="stylesheet"
-        href="/homepage/assets/dist/main.20664f4fd99f97e0eba1.min%EF%B9%96v=H84c22m3tItbPAEwpCKhyOAQYTGTQ68HGMra4tt-K9I.css" />
+        .btn.btn-outline--base {
+            color: #fff !important;
+            opacity: 1 !important;
+        }
 
-    @if (request()->routeIs('faq'))
-      <link rel="stylesheet"
-          href="/homepage/assets/css/InvestFAQ﹖v=fQtkcU54KMvhFvhPI0oK4kYBoX8oIUpBeh_JANK5GTU.css" />
-    @endif
+        .landing-legal .privacy-content ul,
+        .landing-legal .privacy-content ol {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 0;
+            padding-left: 22px;
+        }
 
-        <style>
-            .mobileContainer__wdSTq.__tablet__dIlXn {
-                width:100% !important;
+        .footer-brand {
+            align-items: center;
+            display: inline-flex;
+            margin-bottom: 20px;
+        }
+
+        .footer-item__desc {
+            max-width: 420px;
+        }
+
+        .mobile-sticky-cta {
+            bottom: 18px;
+            left: 16px;
+            position: fixed;
+            right: 16px;
+            z-index: 999;
+        }
+
+        @media (min-width: 768px) {
+            .mobile-sticky-cta {
+                display: none;
             }
-        </style>
+        }
 
+        @media (max-width: 575px) {
+            .site-logo {
+                height: 48px;
+            }
 
-    <script defer
-        src="/homepage/assets/dist/core.634134864c709b2c3486.min%EF%B9%96v=v40E5k3MFHwJdzlABPjeySsACeeNqW5uyn7ECkuZ0A0.js"></script>
-    @vite(
-        [
-            'resources/css/app.css',
-            'resources/css/custom.css',
-            'resources/js/app.js'
-        ])
+            .wrapper .btn {
+                min-height: 42px;
+                padding: 11px 18px !important;
+            }
+        }
+    </style>
 
-      @livewireStyles
-
+    @livewireStyles
 </head>
 
-<body class="main">
-<header class="risk-bg">
-    {{-- <div b-hri9lm5c95 class="risk-container">
-        <script>
-            window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({
-                    'event': 'error_popup',
-                    'message': 'Unfortunately, {{ config('mail.APP_NAME') }} is not available in your region. Please note that {{ config('mail.APP_NAME') }} does not provide services to U.S. persons.',
-                    'locale': 'Client Country: CY &#xA;Client Language: en &#xA;IP Country: CY &#xA;IP Language: en &#xA;'
-                });
-        </script>
-        <div b-hri9lm5c95 class="country-support-row">
-            <p b-hri9lm5c95 class="risk-text">Unfortunately, {{ config('mail.APP_NAME') }} is not available in your region. Please note that
-                {{ config('mail.APP_NAME') }} does not provide services to U.S. persons.</p>
-        </div>
-    </div>--}}
-    <nav b-hri9lm5c95 style="padding-top:10px;">
-        <div b-hri9lm5c95 id="top" class="wrapper">
-            <div b-hri9lm5c95 class="row-items">
-                <div b-hri9lm5c95 class="invest-logo !w-auto">
-                    <a b-hri9lm5c95 href="/">
-                        <div b-hri9lm5c95 style="display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: bold;">
-                            {{-- <img
-                                src="/homepage/assets/img/logo.png" loading="eager"
-                                alt="{{ config('mail.APP_NAME') }} logo, the platform for crypto trading and automated bots."
-                                class="image-31 !w-[150px]" /> --}}
-                            <img src="/images/aotexailogo.png" loading="eager"
-                                alt="{{ config('mail.APP_NAME') }} logo, the platform for crypto trading and automated bots." style="width: 40px" alt="">
-                            <span>AOTEXAI</span>
+<body>
+    <div class="wrapper">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-main">
+                <div class="container">
+                    <a class="navbar-brand" href="{{ route('home') }}" aria-label="Cloudspaceaitrading home">
+                        <img src="/assets/logo.png" alt="Cloudspaceaitrading logo" class="site-logo">
+                    </a>
 
+                    <div class="right-nav">
+                        <div class="gtranslate-shell d-none d-lg-flex">
+                            <div class="gtranslate_wrapper"></div>
                         </div>
-                    </a>
-                </div>
-            </div>
-            <input b-hri9lm5c95 type="radio" name="slider" id="menu-btn"
-                oninput="document.body.style.overflowY = 'hidden'">
-            <input b-hri9lm5c95 type="radio" name="slider" id="close-btn"
-                oninput="document.body.style.overflowY = 'visible'">
-
-            <ul b-hri9lm5c95 class="nav-links item-center flex flex-row">
-                <label b-hri9lm5c95 for="close-btn" class="btn close-btn">
-                    <svg b-hri9lm5c95 b-hri9lm5c95="" class="svg-inline--fa fa-xmark" aria-hidden="true"
-                        focusable="false" data-prefix="fas" data-icon="xmark" role="img"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
-                        <path b-hri9lm5c95 fill="currentColor"
-                            d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z">
-                        </path>
-                    </svg>
-                </label>
-                <li b-hri9lm5c95>
-                    <a b-hri9lm5c95 id="invest-link" href="/">Home</a>
-                </li>
-                <li b-hri9lm5c95>
-                    <a b-hri9lm5c95 class="" id="market-radar-link" href="/faq">
-                       FAQ's
-                    </a>
-                </li>
-                {{-- <li b-hri9lm5c95>
-                    <a b-hri9lm5c95 href="#" class="desktop-item">Academy</a>
-                    <input b-hri9lm5c95 type="checkbox" id="showDrop2">
-                    <label b-hri9lm5c95 for="showDrop2" class="mobile-item">Academy</label>
-                    <ul b-hri9lm5c95 class="drop-menu">
-                        <li b-hri9lm5c95>
-                            <a b-hri9lm5c95 href="Articles.html">Articles</a>
-                        </li>
-                        <li b-hri9lm5c95>
-                            <a b-hri9lm5c95 href="FAQ.html">FAQ</a>
-                        </li>
-                    </ul>
-                </li>
-                <li b-hri9lm5c95>
-                    <a b-hri9lm5c95 href="#" class="desktop-item">Company</a>
-                    <input b-hri9lm5c95 type="checkbox" id="showDrop3">
-                    <label b-hri9lm5c95 for="showDrop3" class="mobile-item">Company</label>
-                    <ul b-hri9lm5c95 class="drop-menu">
-                        <li b-hri9lm5c95>
-                            <a b-hri9lm5c95 href="About.html"> About</a>
-                        </li>
-                        <li b-hri9lm5c95>
-                            <a b-hri9lm5c95 href="Fees.html"> Commissions</a>
-                        </li>
-                        <li b-hri9lm5c95>
-                            <a b-hri9lm5c95 href="Legal.html"> Legal</a>
-                        </li>
-                        <li b-hri9lm5c95>
-                            <a b-hri9lm5c95 href="ContactUs.html"> Contact Us</a>
-                        </li>
-                    </ul>
-                </li> --}}
-                <li b-hri9lm5c95>
-                   <div class="lg:flex ml-3 hidden">
-                        <div class="gtranslate_wrapper"></div>
+                        <a href="{{ route('login') }}" class="btn btn-outline--base d-none d-sm-block">
+                            Log In <i class="flaticon-arrow-upper-right"></i>
+                        </a>
+                        <a href="{{ route('register') }}" class="btn btn--base-two d-none d-sm-block">
+                            Sign Up <i class="flaticon-arrow-upper-right"></i>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+                            aria-label="Toggle navigation">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                            </svg>
+                        </button>
                     </div>
-                </li>
-                <li b-hri9lm5c95>
-                    <a b-hri9lm5c95 href="{{ route('login') }}" class="mid-type-button store_link_button !w-auto">Login</a>
-                </li>
-                <li b-hri9lm5c95 class="lg:!ml-3">
-                    <a b-hri9lm5c95 href="{{ route('register') }}" class="mid-type-button store_link_button !w-auto">Sign Up</a>
-                </li>
-            </ul>
 
-            <label for="" class="lg:hidden block">
-                <div class="flex ml-3">
-                        <div class="gtranslate_wrapper d-lg-none d-sm-block"></div>
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                                <img src="/assets/logo.png" alt="Cloudspaceaitrading logo" class="site-logo">
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="d-flex d-lg-none gap-3 pt-3 justify-content-center flex-wrap px-3">
+                            <div class="gtranslate-shell w-100 justify-content-center">
+                                <div class="gtranslate_wrapper"></div>
+                            </div>
+                            <a href="{{ route('login') }}" class="btn btn-outline--base d-sm-none">
+                                Log In <i class="flaticon-arrow-upper-right"></i>
+                            </a>
+                            <a href="{{ route('register') }}" class="btn btn--base-two d-sm-none">
+                                Sign Up <i class="flaticon-arrow-upper-right"></i>
+                            </a>
+                        </div>
+                        <div class="offcanvas-body align-items-center">
+                            <ul class="navbar-nav justify-content-center flex-grow-1">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('home') }}">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('faq') }}">FAQ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('terms') }}">Terms</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('privacy') }}">Privacy</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </label>
-            <label b-hri9lm5c95 for="menu-btn" class="btn menu-btn ">
-                <svg b-hri9lm5c95 b-hri9lm5c95="" class="svg-inline--fa fa-bars" aria-hidden="true" focusable="false"
-                    data-prefix="fas" data-icon="bars" role="img" xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512" data-fa-i2svg="">
-                    <path b-hri9lm5c95 fill="currentColor"
-                        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z">
-                    </path>
-                </svg>
-            </label>
-        </div>
-    </nav>
-</header>
+            </nav>
+        </header>
 
-    <main b-hri9lm5c95 role="main" class="pb-3" dir="ltr">
-      {{ $slot }}
-    </main>
+        <main>
+            {{ $slot }}
+        </main>
 
-    <!-- Sticky button -->
-    <div b-hri9lm5c95 class="reward-sticky-button-container">
-        <div b-hri9lm5c95 class="reward-sticky-button-background"></div>
-        <div b-hri9lm5c95 class="reward-sticky-button-wrapper">
-            <a href="{{ route('register') }}" class="get-app-sticky-button store_link_button">
-                <span b-hri9lm5c95 class="get-app-text !text-white">Start Trading</span>
+        <div class="mobile-sticky-cta">
+            <a href="{{ route('register') }}" class="btn btn--base-two w-100">
+                Start Trading <i class="flaticon-arrow-upper-right"></i>
             </a>
         </div>
-    </div>
 
-    <footer b-hri9lm5c95 class="footer-container-fluid  ">
-        <div b-hri9lm5c95 class="footer-container">
-            <div b-hri9lm5c95 class="footer-columns">
-                <div b-hri9lm5c95 class="footer-column4">
-                    <div b-hri9lm5c95>
-                        <a b-hri9lm5c95 href="/" style="display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: bold;">
-
-                             <img src="/images/aotexailogo.png" loading="eager"
-                                    alt="{{ config('mail.APP_NAME') }} logo, the platform for crypto trading and automated bots." style="width: 40px" alt="">
-                                <span>AOTEXAI</span>
-                        </a>
-                    </div>
-                    <div b-hri9lm5c95 class="social-icons !gap-3">
-                        <a b-hri9lm5c95 href="#" class="store_link_button !mt-3">
-                            <img b-hri9lm5c95 class="social-icon !p-0" src="/images/google.PNG"
-                                alt="Appstore" loading="lazy" />
-                        </a>
-                        <a b-hri9lm5c95 href="#" class="store_link_button bg-[#08190c] rounded-lg">
-                            <img b-hri9lm5c95 class="social-icon" src="/images/apple.svg"
-                                alt="Google Play" loading="lazy" />
-                        </a>
+        <footer class="footer-area">
+            <div class="py-120">
+                <div class="container position-relative">
+                    <div class="row justify-content-center gy-5">
+                        <div class="col-xl-4 col-lg-6">
+                            <div class="footer-item footer-logo-con pe-xl-5">
+                                <a class="footer-brand" href="{{ route('home') }}">
+                                    <img src="/assets/logo.png" alt="Cloudspaceaitrading logo" class="site-logo">
+                                </a>
+                                <p class="footer-item__desc">
+                                    AI-powered automated trading with fast deposits, withdrawals, and simple tools for hands-free market participation.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xl-8">
+                            <div class="footer-widget__content">
+                                <div class="footer-item">
+                                    <h5 class="footer-item__title">Account</h5>
+                                    <ul class="footer-menu">
+                                        <li class="footer-menu__item">
+                                            <a href="{{ route('login') }}" class="footer-menu__link">Login</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a href="{{ route('register') }}" class="footer-menu__link">Register</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="footer-item">
+                                    <h5 class="footer-item__title">Company</h5>
+                                    <ul class="footer-menu">
+                                        <li class="footer-menu__item">
+                                            <a href="{{ route('faq') }}" class="footer-menu__link">FAQ</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a href="{{ route('terms') }}" class="footer-menu__link">Terms</a>
+                                        </li>
+                                        <li class="footer-menu__item">
+                                            <a href="{{ route('privacy') }}" class="footer-menu__link">Privacy Policy</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="footer-item">
+                                    <h5 class="footer-item__title">Contact</h5>
+                                    <ul class="footer-contact-menu">
+                                        <li class="footer-contact-menu__item">
+                                            <div class="footer-contact-menu__item-icon">
+                                                <i class="fa-solid fa-envelope"></i>
+                                            </div>
+                                            <div class="footer-contact-menu__item-content">
+                                                <p>support@cloudspaceaitrading.com</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div b-hri9lm5c95 class="space"></div>
 
-            <div b-hri9lm5c95 class="footer-pages-container">
-                <ul b-hri9lm5c95 class="footer-column2">
-                    <li b-hri9lm5c95 class="footer-headline">Account</li>
-                    <li b-hri9lm5c95 class="footer-sub">
-                        <a b-hri9lm5c95 class="footer-sub" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li b-hri9lm5c95 class="footer-sub">
-                        <a b-hri9lm5c95 class="footer-sub" href="{{ route('register') }}">Register</a>
-                    </li>
-                </ul>
-                <ul b-hri9lm5c95 class="footer-column3">
-                    <li b-hri9lm5c95 class="footer-headline">Company</li>
-                    <li b-hri9lm5c95 class="footer-sub">
-                        <a b-hri9lm5c95 class="footer-sub" href="/terms">Terms</a>
-                    </li>
-                    <li b-hri9lm5c95 class="footer-sub">
-                        <a b-hri9lm5c95 class="footer-sub" href="/faq">FAQ</a>
-                    </li>
-                    <li b-hri9lm5c95 class="footer-sub">
-                        <a b-hri9lm5c95 class="footer-sub" href="/privacy">Privacy Policy</a>
-                    </li>
-                </ul>
+            <div class="bottom-footer py-4">
+                <div class="container">
+                    <div class="row gy-3 align-items-center">
+                        <div class="col-md-6 order-1 order-md-0">
+                            <div class="bottom-footer-text text-white text-center text-md-start">
+                                <a href="{{ route('home') }}">Cloudspaceaitrading</a>
+                                &copy; 2026. All Rights Reserved.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <nav class="d-flex justify-content-md-end gap-4 row-gap-2 justify-content-center flex-wrap">
+                                <a href="{{ route('privacy') }}" class="fs-16 text-white">Privacy Policy</a>
+                                <a href="{{ route('terms') }}" class="fs-16 text-white">Terms</a>
+                                <a href="{{ route('faq') }}" class="fs-16 text-white">FAQ</a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <p b-hri9lm5c95 class="disclaimer-text">
-            {{ config('mail.APP_NAME') }} (BMAW) </br>
-            150 Frazer hills Street, </br>
-            1150 Vishon,  </br>
-            Austria. </br>
-            support@aotexai.com </br>
-            Chamber of Commerce number: 8875422
-
-        </p>
-
-        <p b-hri9lm5c95 class="rights">
-            Copyright © 2025 Aotexai, All rights reserved.
-        </p>
-
-        <div b-hri9lm5c95 class="space-400"></div>
-    </footer>
-
-    <!-- Floating Chat Widget -->
-    <div class="fixed bottom-20 w-[90%] lg:w-[30%] h-auto right-4 flex flex-col items-end space-y-2 z-[11111]" x-data="{ chatOpen: false }" x-cloak>
-
-        <!-- Chat Modal -->
-        <div
-            x-show="chatOpen"
-            x-transition
-            class="mb-2 w-full h-[80vh] bg-white shadow-xl rounded-lg overflow-hidden border border-gray-300"
-        >
-            <iframe
-                src="https://jivo.chat/AN0hqxJRn4"
-                class="w-full h-full"
-                frameborder="0"
-            ></iframe>
-        </div>
-
-        <!-- Floating Button -->
-        <button
-            @click="chatOpen = !chatOpen"
-            class="h-14 rounded-full bg-gray-100 flex items-center justify-center shadow-lg hover:bg-gray-200 transition !p-2"
-        >
-            <img x-show="!chatOpen" src="/images/chaticon.png" class="h-full" alt="">
-            <span x-show="!chatOpen" class="text-gray-800 text-xl">Need Help?</span>
-            <svg x-show="chatOpen" xmlns="http://www.w3.org/2000/svg" class="h-full text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
-
+        </footer>
     </div>
 
-
-
-
-    <script defer
-        src="/homepage/assets/dist/secondary.28d5bf7798502e2400fc.min%EF%B9%96v=1Gq5_6Ee2EabD_d5_bgS_sm5h8Dv2QPZdc_olipFpi4.js"></script>
-    <script defer
-        src="/homepage/assets/dist/main.afa4a8ee09f77a5b89af.min%EF%B9%96v=2SjfiVr5FJioFQMxO6e1Bz83MWMOv7qGFaXk-dKhIzI.js"></script>
-    <script defer
-        src="/homepage/assets/dist/sticky-button-script.a4a300f8419e81220867.min%EF%B9%96v=RpaLpAowlmpsDrgZgEHZoviXc5ZzgGr1m-jnzXZhxOw.js"></script>
-
-    {{-- <script>
-        const track = document.querySelector('.carousel-track');
-        const slides = Array.from(track.children);
-        const nextButton = document.querySelectorAll('.carousel-arrow')[1];
-        const prevButton = document.querySelectorAll('.carousel-arrow')[0];
-        let currentIndex = 0;
-        let slidesToShow = 3;
-
-        function checkSlidesToShow() {
-            if (window.innerWidth <= 768) {
-                slidesToShow = 1;
-            } else if (window.innerWidth <= 1080) {
-                slidesToShow = 2;
-            } else {
-                slidesToShow = 3;
-            }
-        }
-
-        window.addEventListener('resize', () => {
-            checkSlidesToShow();
-            updateCarousel();
-        });
-
-        checkSlidesToShow();
-
-        nextButton.addEventListener('click', () => {
-            if (currentIndex < slides.length - slidesToShow) {
-                currentIndex++;
-                updateCarousel();
-            }
-        });
-
-        prevButton.addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateCarousel();
-            }
-        });
-
-        function updateCarousel() {
-            const slideWidth = slides[0].getBoundingClientRect().width;
-            track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-        }
-    </script> --}}
+    <script src="/xtrady/assets/js/jquery-3.7.1.min.js"></script>
+    <script src="/xtrady/assets/js/boostrap.bundle.min.js"></script>
+    <script src="/xtrady/assets/js/odometer.min.js"></script>
+    <script src="/xtrady/assets/js/swiper-bundle.min.js"></script>
+    <script src="/xtrady/assets/js/scrollreveal.min.js"></script>
+    <script src="/xtrady/assets/js/fancybox.umd.js"></script>
+    <script src="/xtrady/assets/js/gsap.min.js"></script>
+    <script src="/xtrady/assets/js/ScrollTrigger.js"></script>
+    <script src="/xtrady/assets/js/main.js"></script>
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            const track = document.querySelector('.marquee-track');
-            const originalItems = Array.from(track.children);
-
-            function duplicateMarqueeItems() {
-                let trackWidth = track.scrollWidth;
-                const screenWidth = window.innerWidth;
-
-                while (trackWidth < screenWidth * 2) {
-                    originalItems.forEach(item => {
-                        const clone = item.cloneNode(true);
-                        track.appendChild(clone);
-                    });
-                    trackWidth = track.scrollWidth;
-                }
-            }
-
-            duplicateMarqueeItems();
-        });
+        window.gtranslateSettings = {
+            default_language: "en",
+            detect_browser_language: true,
+            wrapper_selector: ".gtranslate_wrapper",
+            flag_size: 24,
+            flag_style: "3d"
+        };
     </script>
-
-
-
-
-    <script>window.gtranslateSettings = {"default_language":"en","detect_browser_language":true,"wrapper_selector":".gtranslate_wrapper","flag_size":24,"flag_style":"3d"}</script>
     <script src="https://cdn.gtranslate.net/widgets/latest/popup.js" defer></script>
 
-    <!--End of Tawk.to Script-->
     @livewireScripts
     @stack('scripts')
-
 </body>
 
 </html>

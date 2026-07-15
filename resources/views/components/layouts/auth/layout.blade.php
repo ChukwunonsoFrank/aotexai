@@ -23,6 +23,12 @@
     @vite('resources/css/custom.css')
 
     <style>
+        :root {
+            --color-accent: #0d6efd;
+            --color-accent-hover: #0b5ed7;
+            --color-accent-foreground: #ffffff;
+        }
+
         [x-cloak] {
             display: none !important;
         }

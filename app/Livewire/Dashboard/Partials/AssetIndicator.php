@@ -28,7 +28,7 @@ class AssetIndicator extends Component
             $this->assetClass = $this->activeBot['asset_class'];
             $this->isBotActive = true;
         } else {
-            $this->assetImageUrl = 'images/aotexailogo.png';
+            $this->assetImageUrl = 'assets/logo.png';
             $this->asset = 'No data';
             $this->assetClass = 'No data';
             $this->isBotActive = false;

@@ -1,9 +1,8 @@
 <div class="auth-login-screen">
     <div class="auth-login-wrap">
         <div class="auth-brand">
-            <img src="/images/aotexailogo.png" loading="eager"
-                alt="{{ config('mail.APP_NAME') }} logo, the platform for crypto trading and automated bots." style="width: 40px" alt="">
-            <span class="brand-text">AOTEXAI</span>
+            <img src="/assets/logo.png" loading="eager"
+                alt="Cloudspaceaitrading logo" style="width: 75px; height: auto;">
         </div>
 
         <div class="login">
