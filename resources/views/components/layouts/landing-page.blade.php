@@ -10,7 +10,8 @@
     <meta name="keywords" content="AI trading, automated trading, trading bot, forex trading, crypto trading, demo account">
     <title>Cloudspaceaitrading - AI Trading Platform</title>
 
-    <link rel="shortcut icon" href="/xtrady/assets/images/logo/favicon.ico">
+    <link rel="icon" type="image/png" href="/assets/logo.png">
+    <link rel="apple-touch-icon" href="/assets/logo.png">
     <link rel="stylesheet" href="/xtrady/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/xtrady/assets/css/all.min.css">
     <link rel="stylesheet" href="/xtrady/assets/fonts/flaticon_xtrade.css">
