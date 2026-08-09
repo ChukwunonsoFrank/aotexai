@@ -3,6 +3,7 @@
 namespace App\Livewire\Auth;
 
 use App\Models\User;
+use App\Notifications\UserLoggedIn;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -37,26 +38,46 @@ class Login extends Component
     public function login()
     {
         try {
-            // if (is_null($this->gRecaptchaResponse)) {
-            //     $this->dispatch('login-error', message: 'Please confirm you are not a robot.')->self();
-            // }
+            if (is_null($this->gRecaptchaResponse)) {
+                $this->dispatch('login-error', message: 'Please confirm you are not a robot.')->self();
+            }
 
-            // $recatpchaResponse = Http::get('https://www.google.com/recaptcha/api/siteverify', [
-            //     'secret' => config('services.recaptcha.secret'),
-            //     'response' => $this->gRecaptchaResponse,
-            // ]);
+            $recatpchaResponse = Http::get('https://www.google.com/recaptcha/api/siteverify', [
+                'secret' => config('services.recaptcha.secret'),
+                'response' => $this->gRecaptchaResponse,
+            ]);
 
-            // $result = $recatpchaResponse->json();
+            $result = $recatpchaResponse->json();
 
-            // if ($recatpchaResponse->successful() && $result['success'] == true) {
-            $this->validate();
+            if ($recatpchaResponse->successful() && $result['success'] == true) {
+                $this->validate();
 
-            $this->ensureIsNotRateLimited();
+                $this->ensureIsNotRateLimited();
 
-            $user = User::where('email', $this->email)->first();
+                $user = User::where('email', $this->email)->first();
 
-            if ($user && $user->two_factor_enabled) {
-                if (! Auth::validate(['email' => $this->email, 'password' => $this->password])) {
+                if ($user && $user->two_factor_enabled) {
+                    if (! Auth::validate(['email' => $this->email, 'password' => $this->password])) {
+                        RateLimiter::hit($this->throttleKey());
+
+                        throw ValidationException::withMessages([
+                            'email' => __('auth.failed'),
+                        ]);
+                    }
+
+                    RateLimiter::clear($this->throttleKey());
+
+                    session([
+                        'login_2fa.user_id' => $user->id,
+                        'login_2fa.remember' => $this->remember,
+                    ]);
+
+                    $this->redirectRoute('login.2fa');
+
+                    return;
+                }
+
+                if (! Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
                     RateLimiter::hit($this->throttleKey());
 
                     throw ValidationException::withMessages([
@@ -65,39 +86,22 @@ class Login extends Component
                 }
 
                 RateLimiter::clear($this->throttleKey());
+                Session::forget('login_2fa');
+                Session::regenerate();
 
-                session([
-                    'login_2fa.user_id' => $user->id,
-                    'login_2fa.remember' => $this->remember,
-                ]);
+                session()->flash('just_logged_in', true);
 
-                $this->redirectRoute('login.2fa');
+                if (Auth::user()->is_admin) {
+                    return redirect('/admin/dashboard');
+                }
 
-                return;
+                $admin = User::where('is_admin', 1)->first();
+                $admin?->notify(new UserLoggedIn(Auth::user()->email));
+
+                $this->redirectIntended(default: route('dashboard', absolute: false));
+            } else {
+                $this->dispatch('login-error', message: 'Please confirm you are not a robot.')->self();
             }
-
-            if (! Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-                RateLimiter::hit($this->throttleKey());
-
-                throw ValidationException::withMessages([
-                    'email' => __('auth.failed'),
-                ]);
-            }
-
-            RateLimiter::clear($this->throttleKey());
-            Session::forget('login_2fa');
-            Session::regenerate();
-
-            session()->flash('just_logged_in', true);
-
-            if (Auth::user()->is_admin) {
-                return redirect('/admin/dashboard');
-            }
-
-            $this->redirectIntended(default: route('dashboard', absolute: false));
-            // } else {
-            //     $this->dispatch('login-error', message: 'Please confirm you are not a robot.')->self();
-            // }
         } catch (\Exception $e) {
             $this->dispatch('login-error', message: $e->getMessage())->self();
         }

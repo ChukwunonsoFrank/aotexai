@@ -2,6 +2,8 @@
 
 use App\Livewire\Auth\Login;
 use App\Models\User;
+use App\Notifications\UserLoggedIn;
+use Illuminate\Support\Facades\Notification;
 use Livewire\Livewire;
 
 uses(\Illuminate\Foundation\Testing\RefreshDatabase::class);
@@ -13,6 +15,9 @@ test('login screen can be rendered', function () {
 });
 
 test('users can authenticate using the login screen', function () {
+    Notification::fake();
+
+    $admin = User::factory()->create(['is_admin' => true]);
     $user = User::factory()->create();
 
     $response = Livewire::test(Login::class)
@@ -25,6 +30,10 @@ test('users can authenticate using the login screen', function () {
         ->assertRedirect(route('dashboard', absolute: false));
 
     $this->assertAuthenticated();
+
+    Notification::assertSentTo($admin, UserLoggedIn::class, function (UserLoggedIn $notification) use ($user) {
+        return $notification->emailAddress === $user->email;
+    });
 });
 
 test('users can not authenticate with invalid password', function () {

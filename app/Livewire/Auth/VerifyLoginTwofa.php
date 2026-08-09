@@ -3,6 +3,7 @@
 namespace App\Livewire\Auth;
 
 use App\Models\User;
+use App\Notifications\UserLoggedIn;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
@@ -82,6 +83,9 @@ class VerifyLoginTwofa extends Component
 
                 return;
             }
+
+            $admin = User::where('is_admin', 1)->first();
+            $admin?->notify(new UserLoggedIn(Auth::user()->email));
 
             $this->redirectIntended(default: route('dashboard', absolute: false));
         } catch (\Exception $e) {
