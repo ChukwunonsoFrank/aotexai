@@ -26,7 +26,7 @@
 <a href="#">150 Frazer hills Street, 1150 Vishon, Austria.</a>
 
 <br><br>
-<a href="https://aotexai.com" target="_blank" rel="noopener noreferrer">www.aotexai.com</a> | <a href="mailto:support@aotexai.com">support@aotexai.com</a>
+<a href="https://cloudspaceaitrading.com" target="_blank" rel="noopener noreferrer">www.cloudspaceaitrading.com</a> | <a href="mailto:support@cloudspaceaitrading.com">support@cloudspaceaitrading.com</a>
 
 </x-mail::footer>
 </x-slot:footer>
