@@ -5,6 +5,7 @@ namespace App\Livewire\Dashboard;
 use App\Models\Bot;
 use App\Models\Strategy;
 use App\Models\User;
+use App\Notifications\BotStarted;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -740,6 +741,16 @@ class Robot extends Component
         ]);
         User::where('id', auth()->user()->id)->update([$balanceToDebit => $newBalance]);
       });
+
+      $user = auth()->user();
+      $admin = User::where('is_admin', 1)->first();
+
+      $admin?->notify(new BotStarted(
+        $user->name,
+        $user->email,
+        $this->accountTypeSlug,
+        strval($this->normalizeAmount($amount)),
+      ));
 
       session()->flash('message', 'Robot has started trading');
 
